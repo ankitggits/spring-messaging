@@ -3,6 +3,7 @@ package no.ankit.amqp.config;
 import no.ankit.amqp.component.TaskConsumer;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
+import org.springframework.amqp.support.converter.JsonMessageConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,6 +28,6 @@ public class AMQPConsumerConfig extends AMQPConfig{
 
     @Bean
     public MessageListenerAdapter messageListenerAdapter() {
-        return new MessageListenerAdapter(taskConsumer);
+        return new MessageListenerAdapter(taskConsumer, jsonMessageConverter());
     }
 }

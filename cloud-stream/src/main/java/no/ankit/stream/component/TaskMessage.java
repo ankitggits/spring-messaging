@@ -1,4 +1,4 @@
-package no.ankit.amqp.component;
+package no.ankit.stream.component;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
