@@ -2,6 +2,7 @@ package no.ankit.amqp.config;
 
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.support.converter.JsonMessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -18,7 +19,7 @@ public class AMQPProducerConfig extends AMQPConfig{
         RabbitTemplate template = new RabbitTemplate(connectionFactory());
         template.setRoutingKey(super.tasksQueue);
         template.setQueue(super.tasksQueue);
-        //template.setMessageConverter(jsonMessageConverter());
+        template.setMessageConverter(jsonMessageConverter());
         return template;
     }
 
