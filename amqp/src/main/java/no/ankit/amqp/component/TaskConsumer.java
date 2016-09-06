@@ -1,5 +1,6 @@
 package no.ankit.amqp.component;
 
+import org.springframework.amqp.core.Message;
 import org.springframework.stereotype.Component;
 
 /**

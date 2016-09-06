@@ -1,5 +1,6 @@
-package no.ankit.stream.component;
+package no.ankit.stream.Producer;
 
+import no.ankit.stream.component.TaskMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.messaging.Source;
@@ -19,10 +20,10 @@ import java.util.Collections;
  */
 @RestController
 @EnableBinding(Source.class)
-public class RestProducer {
+public class RestBindingProducer {
 
     @Autowired
-    private Source channels;
+    private Source source;
 
     @RequestMapping(path = "/messages/{text}", method = RequestMethod.GET, consumes = "application/json")
     @ResponseStatus(HttpStatus.ACCEPTED)
@@ -30,9 +31,10 @@ public class RestProducer {
         sendMessage(text, contentType);
     }
 
-    private void sendMessage(Object body, Object contentType) {
-        channels.output().send(MessageBuilder.createMessage(body,
+    private void sendMessage(String body, Object contentType) {
+        source.output().send(MessageBuilder.createMessage(new TaskMessage(body),
                 new MessageHeaders(Collections.singletonMap(MessageHeaders.CONTENT_TYPE, contentType))));
+        System.out.println("Sent the message");
     }
 
 
